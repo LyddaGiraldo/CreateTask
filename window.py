@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog as fd
 from tkinter import PhotoImage as PI
-from PIL import Image, ImageTK
+
 # tk._test()
 
 
@@ -9,9 +9,9 @@ from PIL import Image, ImageTK
 def openFiles():
     BWimage = fd.askopenfilename(title= "Provide a black and white PNG (TRANSPARENT IS NOT WHITE!)", filetypes= [("PNG files", "*.png")])
     if BWimage:
-        with open(BWimage, "rb") as file:
-            content = Image.open(file)
-            tk.Label(source, content).pack()
+        with open(BWimage, "rb") as imagefile:
+            content = PI(file = imagefile)
+            tk.Label(source, image = content).pack()
 
 
 source = tk.Tk()
