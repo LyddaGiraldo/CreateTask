@@ -1,0 +1,20 @@
+import tkinter as tk
+from tkinter import filedialog as fd
+from PIL import Image, ImageTk
+
+# Create the main window
+parent = tk.Tk()
+parent.title("Image in Tkinter")
+
+
+BWimage = fd.askopenfilename(title= "Provide a black and white PNG (TRANSPARENT IS NOT WHITE!)", filetypes= [("PNG files", "*.png")])
+# Load and display an image 
+image = Image.open(BWimage)
+image = ImageTk.PhotoImage(image)
+
+# Create a label to display the image
+image_label = tk.Label(parent, image=image)
+image_label.pack()
+
+# Start the Tkinter event loop
+parent.mainloop()
