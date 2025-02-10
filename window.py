@@ -18,14 +18,14 @@ class MainWindow():
         self.importImage = tk.Button(self.source, text="Enter photo", command= self.openFiles).pack()
         self.BWImageDisplay = tk.Label(source, text="test", image= ImageTk.PhotoImage(self.BWImage)).pack()
         
-
-    def openFiles():
-        return;
-     #   image = fd.askopenfilename(title= "Provide a black and white PNG (TRANSPARENT IS NOT WHITE!)", filetypes= [("PNG files", "*.png")])
+    def openFiles(self):
+    
+        image = fd.askopenfilename(title= "Provide a black and white PNG (TRANSPARENT IS NOT WHITE!)", filetypes= [("PNG files", "*.png")])
         
-      #  image = Image.open(image)
-       # self.BWimage = ImageTk.PhotoImage(image)
-        #print("imagefound")
+        image = Image.open(image)
+        self.BWimage = ImageTk.PhotoImage(image)
+        self.BWImageDisplay.config(image=self.BWimage)
+        print("imagefound")
         
         
 
