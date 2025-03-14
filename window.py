@@ -11,7 +11,7 @@ class MainWindow():
         self.source = source
         self.source.title("Testing")
         self.source.minsize(340, 200)
-        self.source.geometry("500x300+100+100")
+        self.source.geometry("600x300+100+100")
         
         defaultImage = Image.open("defaultgrey.png")
         defaultImage = defaultImage.resize((250,250))
@@ -27,8 +27,21 @@ class MainWindow():
 
         self.importImage = tk.Button(self.source, text="Enter photo", command= self.openFiles)
         self.importImage.pack(side= "left")
+
+        self.insertText = tk.Text(self.source, height = 5, width = 20)
+        self.insertText.pack(side="right")
+
+        self.insertTextButton = tk.Button(self.source, text="Submit text", command=self.readText)
+        self.insertTextButton.pack(side="right")
+
+        self.inputtedTextList = []
+
+    def readText(self):
+        inputtedText = self.insertText.get("1.0", "end-1c")
+        self.inputtedTextList = list(inputtedText)
+        print(self.inputtedTextList)
         
-    def openFiles(self):
+    def openFiles(self):                                                                     
     
         image = fd.askopenfilename(title= "Provide a black and white PNG (TRANSPARENT IS NOT WHITE!)", filetypes= [("PNG files", "*.png")])
 
