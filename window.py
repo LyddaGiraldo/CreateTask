@@ -46,6 +46,12 @@ class MainWindow():
         image = fd.askopenfilename(title= "Provide a black and white PNG (TRANSPARENT IS NOT WHITE!)", filetypes= [("PNG files", "*.png")])
 
         image = Image.open(image)
+        image.convert("1")
+        image.show
+        pixelinfo = image.load()
+
+        print(image.size)
+        print(pixelinfo[1,1])
 
         image = image.resize((250,250))
         self.BWimage = ImageTk.PhotoImage(image)
