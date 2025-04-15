@@ -1,6 +1,3 @@
-from email.mime import image
-from email.policy import default
-import imghdr
 import tkinter as tk
 from tkinter import filedialog as fd
 from tkinter import PhotoImage as PI
