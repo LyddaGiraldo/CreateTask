@@ -4,8 +4,6 @@ from tkinter import PhotoImage as PI
 from PIL import Image, ImageTk
 import numpy as np
 
-# tk._test()
-
 np.set_printoptions(threshold=np.inf)
 
 class MainWindow():
@@ -16,8 +14,6 @@ class MainWindow():
         with open("loreipsum.txt", "r") as file:
             defaultText = file.read()
             
-        #print(defaultText)
-
         self.source = source
         self.source.title("Image to Text Converter")
         self.source.minsize(340, 200)
@@ -30,8 +26,11 @@ class MainWindow():
         self.textFrame.pack(side="right")
         
         defaultImage = Image.open("defaultgrey.png")
+        self.PIL_BW_image = defaultImage.convert(mode="1")
         defaultImage = defaultImage.resize((250,250))
         defaultImage = ImageTk.PhotoImage(defaultImage)
+        
+        
 
         self.imageInstructions= tk.Label(self.imageFrame, text="Please enter a black and white png file.\nColored images will be turned monochrome.\nLarger files may result in slowed runtimes.")
         self.imageInstructions.pack()
@@ -61,16 +60,6 @@ class MainWindow():
 
         imageArray= np.asarray(self.PIL_BW_image)
         
-        """
-        print(self.inputtedTextList)
-        print(self.BWConvertedimage.size)
-        print(imageData)
-        print(self.PIL_BW_image.getbands()) 
-        print("image shape = ")
-        print(imageArray.shape)       
-        print(imageArray)
-        """
-        
         formattedText = ''
         i=0
         
@@ -89,31 +78,6 @@ class MainWindow():
         
         with open("imageFormattedAsPhoto.txt", "w") as iFAPFile:
             iFAPFile.write(formattedText)
-
-        """
-        imageData = [imageData[i] for i in range(len(imageData)) if (i%16==0)]
-        print("saves only every 16 i think")
-        print(imageData, len(imageData))
-
-        imageData = [imageData[i] for i in range(len(imageData)) if (i==0) or imageData[i] != imageData[i-1]]
-        print("without dupes")
-        print(imageData)
-                
-        
-        for row in imageArray:
-            for col in row:
-                if i>=len(inputtedText):
-                    i=0
-                if col:
-                    formattedText += "."
-                    i += 1
-                else:
-                    formattedText += " "
-            
-            formattedText += '\n'
-        #print(formattedText)
-        """
-        
         
     def openFiles(self):                                                                     
     
@@ -124,21 +88,9 @@ class MainWindow():
 
         self.BWimage = ImageTk.PhotoImage(self.PIL_BW_image.resize((250,250)))
         self.BWImageDisplay.configure(image=self.BWimage)
-        print("imagefound")
-
-        """
-       for x in np.nditer(imageArray):
-            print(x)
-       print(list(self.PIL_BW_image.getdata()), len(list(self.PIL_BW_image.getdata())))
-       """ 
 
 source = tk.Tk()
 
 mainFrame = MainWindow(source)
 
 source.mainloop()
-
-"""
-        self.imageToTextLabel = tk.Label(self.imageFrame, text="Image to Text Converter")
-        self.imageToTextLabel.pack()
-"""
