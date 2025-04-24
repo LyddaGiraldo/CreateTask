@@ -26,11 +26,9 @@ class MainWindow():
         self.textFrame.pack(side="right")
         
         defaultImage = Image.open("defaultgrey.png")
-        self.PIL_BW_image = defaultImage.convert(mode="1")
+        PIL_BW_image = defaultImage.convert(mode="1")
         defaultImage = defaultImage.resize((250,250))
         defaultImage = ImageTk.PhotoImage(defaultImage)
-        
-        
 
         self.imageInstructions= tk.Label(self.imageFrame, text="Please enter a black and white png file.\nColored images will be turned monochrome.\nLarger files may result in slowed runtimes.")
         self.imageInstructions.pack()
@@ -49,16 +47,13 @@ class MainWindow():
         self.insertText.insert(tk.END,defaultText)
         self.insertText.pack()
 
-        self.insertTextButton = tk.Button(self.textFrame, text="Submit text", command=self.readText, relief="raised")
-        self.insertTextButton.pack()
+        self.insertTextButton = tk.Button(self.textFrame, text="Submit text", command= lambda: self.readText(PIL_BW_image), relief="raised")
+        self.insertTextButton.pack()    
 
-        self.inputtedTextList = []
+    def readText(self, pilbwImage):
 
-    def readText(self):
         inputtedText = self.insertText.get("1.0", "end-1c")
-        self.inputtedTextList = [ltr for ltr in inputtedText if ltr != '/n']
-
-        imageArray= np.asarray(self.PIL_BW_image)
+        imageArray= np.asarray(pilbwImage)
         
         formattedText = ''
         i=0
